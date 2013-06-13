@@ -1,0 +1,562 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-06 11:49+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\jobmng\models.py:38
+msgid "Need Login"
+msgstr "需要登录"
+
+#: .\jobmng\models.py:40
+msgid "Builder URL"
+msgstr "Builder URL"
+
+#: .\jobmng\models.py:43
+msgid "SMTP Server"
+msgstr "SMTP服务器"
+
+#: .\jobmng\models.py:45
+msgid "SMTP Port"
+msgstr "SMTP端口号"
+
+#: .\jobmng\models.py:47
+msgid "SMTP Username"
+msgstr "SMTP用户名"
+
+#: .\jobmng\models.py:49
+msgid "SMTP Password"
+msgstr "SMTP密码"
+
+#: .\jobmng\models.py:51
+msgid "SMTP TLS"
+msgstr "SMTP TLS"
+
+#: .\jobmng\models.py:60 .\jobmng\models.py:145
+msgid "Name"
+msgstr "名称"
+
+#: .\jobmng\models.py:62
+msgid "Notes"
+msgstr "说明"
+
+#: .\jobmng\models.py:64 .\jobmng\models.py:173
+msgid "Create Time"
+msgstr "创建时间"
+
+#: .\jobmng\models.py:65
+msgid "Type"
+msgstr "类型"
+
+#: .\jobmng\models.py:70
+msgid "State"
+msgstr "状态"
+
+#: .\jobmng\models.py:73
+msgid "Schedule"
+msgstr "调度"
+
+#: .\jobmng\models.py:76
+msgid "Version Control Type"
+msgstr "版本库类型"
+
+#: .\jobmng\models.py:79
+msgid "Build Command"
+msgstr "构建命令"
+
+#: .\jobmng\models.py:82
+msgid "Build Command Directory"
+msgstr "执行构建命令目录"
+
+#: .\jobmng\models.py:85
+msgid "Kill Process On Stop"
+msgstr "停止构建时强杀的进程"
+
+#: .\jobmng\models.py:88 .\jobmng\models.py:187
+msgid "Artifact"
+msgstr "输出文件"
+
+#: .\jobmng\models.py:91
+msgid "Result Expression"
+msgstr "构建是否成功表达式"
+
+#: .\jobmng\models.py:94
+msgid "Phrase Expression"
+msgstr "构建结果表达式"
+
+#: .\jobmng\models.py:97
+msgid "Email On Success"
+msgstr "构建成功时发送邮件"
+
+#: .\jobmng\models.py:100
+msgid "Email On Failure"
+msgstr "构建失败时发送邮件"
+
+#: .\jobmng\models.py:104
+msgid "Finish Command"
+msgstr "构建完成后调用命令"
+
+#: .\jobmng\models.py:112
+msgid "Customer Command 1 Name"
+msgstr "用户自定义命令1的名字"
+
+#: .\jobmng\models.py:114
+msgid "Custome Command 1 Cmd"
+msgstr "用户自定义命令1的命令"
+
+#: .\jobmng\models.py:116
+msgid "Custome Command 1 Path"
+msgstr "用户自定义命令1的执行路径"
+
+#: .\jobmng\models.py:118
+msgid "Custome Command 1 Return"
+msgstr "用户自定义命令1的执行返回"
+
+#: .\jobmng\models.py:121
+msgid "Customer Command 2 Name"
+msgstr "用户自定义命令2的名字"
+
+#: .\jobmng\models.py:123
+msgid "Custome Command 2 Cmd"
+msgstr "用户自定义命令2的命令"
+
+#: .\jobmng\models.py:125
+msgid "Custome Command 2 Path"
+msgstr "用户自定义命令2的执行路径"
+
+#: .\jobmng\models.py:127
+msgid "Custome Command 2 Return"
+msgstr "用户自定义命令2的执行返回"
+
+#: .\jobmng\models.py:130
+msgid "Customer Command 3 Name"
+msgstr "用户自定义命令3的名字"
+
+#: .\jobmng\models.py:132
+msgid "Custome Command 3 Cmd"
+msgstr "用户自定义命令3的命令"
+
+#: .\jobmng\models.py:134
+msgid "Custome Command 3 Path"
+msgstr "用户自定义命令3的执行路径"
+
+#: .\jobmng\models.py:136
+msgid "Custome Command 3 Return"
+msgstr "用户自定义命令3的执行返回"
+
+#: .\jobmng\models.py:144
+msgid "Job"
+msgstr "Job"
+
+#: .\jobmng\models.py:147
+msgid "Vcs Address"
+msgstr "版本库地址"
+
+#: .\jobmng\models.py:149
+msgid "Vcs Username"
+msgstr "版本库用户名"
+
+#: .\jobmng\models.py:151
+msgid "Vcs Password"
+msgstr "版本库密码"
+
+#: .\jobmng\models.py:154
+msgid "Work Copy Directory"
+msgstr "本地路径"
+
+#: .\jobmng\models.py:157
+msgid "Trigger Type"
+msgstr "触发类型"
+
+#: .\jobmng\models.py:160
+msgid "Wait Time"
+msgstr "等待时间"
+
+#: .\jobmng\models.py:162
+msgid "Clean On Build"
+msgstr "构建时先清空"
+
+#: .\jobmng\models.py:165
+msgid "Revert On build"
+msgstr "构建时先Revert"
+
+#: .\jobmng\models.py:175
+msgid "Running"
+msgstr "正在运行"
+
+#: .\jobmng\models.py:177
+msgid "Success"
+msgstr "成功"
+
+#: .\jobmng\models.py:179
+msgid "Return Code"
+msgstr "返回码"
+
+#: .\jobmng\models.py:181
+msgid "Phrase"
+msgstr "结果"
+
+#: .\jobmng\models.py:183
+msgid "Version"
+msgstr "版本"
+
+#: .\jobmng\models.py:185
+msgid "Duration"
+msgstr "耗时"
+
+#: .\jobmng\models.py:189
+msgid "Published"
+msgstr "是否发布"
+
+#: .\jobmng\views.py:153 .\jobmng\views.py:172 .\jobmng\views.py:233
+msgid "Can not find the job"
+msgstr "找不到job"
+
+#: .\jobmng\views.py:160
+msgid "Trig job ok"
+msgstr "触发job成功, 返回后请刷新浏览器以获得最新状态"
+
+#: .\jobmng\views.py:162
+msgid "Can not trig job now"
+msgstr "不能触发job"
+
+#: .\jobmng\views.py:175
+msgid "You must specify a number as vcs id"
+msgstr "你必须指定版本控制系统id"
+
+#: .\jobmng\views.py:183
+msgid "Force job ok"
+msgstr "强制构建job成功, 返回后请刷新浏览器以获得最新状态"
+
+#: .\jobmng\views.py:185
+msgid "Can not force job now"
+msgstr "不能强制运行job"
+
+#: .\jobmng\views.py:191
+msgid "No running job process now"
+msgstr "没有job在运行"
+
+#: .\jobmng\views.py:199 .\jobmng\views.py:225
+msgid "Please login to do this"
+msgstr "需要登录后才能做此操作"
+
+#: .\jobmng\views.py:211 .\jobmng\views.py:252 .\jobmng\views.py:279
+msgid "Can not find the build"
+msgstr "找不到构建"
+
+#: .\jobmng\views.py:297
+msgid "Custom cmd should be 1~3"
+msgstr "错误：用户自定义命令应该是1到3"
+
+#: .\jobmng\views.py:300
+msgid "Custom cmd can not execute"
+msgstr "错误：自定义命令为空，不能执行"
+
+#: .\jobmng\templates\jobs_detail.html.py:29
+#: .\jobmng\templates\jobs_index.html.py:38
+msgid "Turn Off Refresh"
+msgstr "禁止自动刷新"
+
+#: .\jobmng\templates\jobs_detail.html.py:31
+#: .\jobmng\templates\jobs_index.html.py:40
+msgid "Turn On Refresh"
+msgstr "开启自动刷新"
+
+#: .\jobmng\templates\jobs_detail.html.py:33
+#: .\jobmng\templates\jobs_index.html.py:42
+#: .\templates\static\directory_index.html.py:17
+msgid "Admin"
+msgstr "管理"
+
+#: .\jobmng\templates\jobs_detail.html.py:34
+#: .\jobmng\templates\jobs_index.html.py:43 .\templates\admin\base.html.py:48
+#: .\templates\static\directory_index.html.py:18
+msgid "Help"
+msgstr "帮助"
+
+#: .\jobmng\templates\jobs_detail.html.py:40
+#: .\jobmng\templates\jobs_index.html.py:51
+msgid "Builder is running"
+msgstr "Builder正在运行"
+
+#: .\jobmng\templates\jobs_detail.html.py:42
+#: .\jobmng\templates\jobs_index.html.py:56
+msgid "Builder is not running"
+msgstr "Builder已停止"
+
+#: .\jobmng\templates\jobs_detail.html.py:51
+#: .\jobmng\templates\jobs_index.html.py:67
+msgid "id"
+msgstr "id"
+
+#: .\jobmng\templates\jobs_detail.html.py:52
+#: .\jobmng\templates\jobs_index.html.py:72
+msgid "version"
+msgstr "版本"
+
+#: .\jobmng\templates\jobs_detail.html.py:53
+msgid "build on"
+msgstr "构建时间"
+
+#: .\jobmng\templates\jobs_detail.html.py:54
+#: .\jobmng\templates\jobs_index.html.py:73
+msgid "success"
+msgstr "成功"
+
+#: .\jobmng\templates\jobs_detail.html.py:55
+#: .\jobmng\templates\jobs_index.html.py:74
+msgid "code"
+msgstr "返回码"
+
+#: .\jobmng\templates\jobs_detail.html.py:56
+#: .\jobmng\templates\jobs_index.html.py:75
+msgid "phrase"
+msgstr "结果"
+
+#: .\jobmng\templates\jobs_detail.html.py:57
+#: .\jobmng\templates\jobs_index.html.py:76
+msgid "duration"
+msgstr "耗时"
+
+#: .\jobmng\templates\jobs_detail.html.py:58
+#: .\jobmng\templates\jobs_index.html.py:77
+msgid "log"
+msgstr "log记录"
+
+#: .\jobmng\templates\jobs_detail.html.py:59
+#: .\jobmng\templates\jobs_index.html.py:78
+msgid "artifact"
+msgstr "输出文件"
+
+#: .\jobmng\templates\jobs_detail.html.py:60
+#: .\jobmng\templates\jobs_index.html.py:79
+msgid "action"
+msgstr "动作"
+
+#: .\jobmng\templates\jobs_detail.html.py:61
+msgid "custom cmd"
+msgstr "自定义命令"
+
+#: .\jobmng\templates\jobs_detail.html.py:72
+#: .\jobmng\templates\jobs_index.html.py:97
+msgid "building..."
+msgstr "正在构建..."
+
+#: .\jobmng\templates\jobs_detail.html.py:75
+#: .\jobmng\templates\jobs_index.html.py:100
+msgid "cancelled"
+msgstr "已取消"
+
+#: .\jobmng\templates\jobs_detail.html.py:89
+#: .\jobmng\templates\jobs_index.html.py:114
+msgid "view build log"
+msgstr "查看构建log记录"
+
+#: .\jobmng\templates\jobs_detail.html.py:90
+#: .\jobmng\templates\jobs_index.html.py:115
+msgid "view artifact files"
+msgstr "查看输出文件"
+
+#: .\jobmng\templates\jobs_detail.html.py:93
+msgid "flag published"
+msgstr "标记/取消发布，发布的版本将不允许删除"
+
+#: .\jobmng\templates\jobs_detail.html.py:98
+msgid "rebuild it"
+msgstr "重新构建"
+
+#: .\jobmng\templates\jobs_detail.html.py:101
+#: .\jobmng\templates\jobs_detail.html.py:106
+msgid "delete the build"
+msgstr "删除这个构建及输出文件"
+
+#: .\jobmng\templates\jobs_detail.html.py:132
+msgid "previous page"
+msgstr "上一页"
+
+#: .\jobmng\templates\jobs_detail.html.py:140
+msgid "next page"
+msgstr "下一页"
+
+#: .\jobmng\templates\jobs_detail.html.py:143
+msgid "page size"
+msgstr "页面大小"
+
+#: .\jobmng\templates\jobs_detail.html.py:154
+msgid "batch operation"
+msgstr "批量操作"
+
+#: .\jobmng\templates\jobs_detail.html.py:157
+msgid "delete selected builds"
+msgstr "删除选中的构建及输出文件"
+
+#: .\jobmng\templates\jobs_detail.html.py:163
+msgid "No build found"
+msgstr "尚未构建"
+
+#: .\jobmng\templates\jobs_detail.html.py:167
+msgid "Job created on"
+msgstr "Job创建时间"
+
+#: .\jobmng\templates\jobs_detail.html.py:168
+msgid "type"
+msgstr "类型"
+
+#: .\jobmng\templates\jobs_detail.html.py:169
+msgid "schedule"
+msgstr "调度"
+
+#: .\jobmng\templates\jobs_detail.html.py:170
+#: .\jobmng\templates\jobs_index.html.py:69
+msgid "state"
+msgstr "调度状态"
+
+#: .\jobmng\templates\jobs_detail.html.py:171
+msgid "visit"
+msgstr "访问"
+
+#: .\jobmng\templates\jobs_detail.html.py:171
+msgid "job workspace"
+msgstr "job目录"
+
+#: .\jobmng\templates\jobs_detail.html.py:172
+msgid "notes"
+msgstr "说明"
+
+#: .\jobmng\templates\jobs_detail.html.py:177
+msgid "Job not found"
+msgstr "找不到Job"
+
+#: .\jobmng\templates\jobs_detail.html.py:202
+msgid "delete selected builds warning"
+msgstr "确认删除选中的构建及输出文件吗?(标记为发布的版本不会删除)"
+
+#: .\jobmng\templates\jobs_detail.html.py:207
+msgid "must select at least one build"
+msgstr "必须至少选择一个构建"
+
+#: .\jobmng\templates\jobs_index.html.py:53
+msgid "Stop Builder"
+msgstr "停止Builder"
+
+#: .\jobmng\templates\jobs_index.html.py:58
+msgid "Start Builder"
+msgstr "启动Builder"
+
+#: .\jobmng\templates\jobs_index.html.py:68
+msgid "name"
+msgstr "名称"
+
+#: .\jobmng\templates\jobs_index.html.py:70
+msgid "build count"
+msgstr "构建数"
+
+#: .\jobmng\templates\jobs_index.html.py:71
+msgid "lastbuild"
+msgstr "最后构建时间"
+
+#: .\jobmng\templates\jobs_index.html.py:117
+msgid "No build yet."
+msgstr "尚未构建"
+
+#: .\jobmng\templates\jobs_index.html.py:122
+msgid "build now"
+msgstr "立刻构建"
+
+#: .\jobmng\templates\jobs_index.html.py:125
+msgid "cancel"
+msgstr "取消"
+
+#: .\jobmng\templates\jobs_index.html.py:129
+msgid "clear the job"
+msgstr "删除所有未发布的版本及其文件"
+
+#: .\jobmng\templates\jobs_index.html.py:140
+msgid "display hided jobs"
+msgstr "显示隐藏的Job"
+
+#: .\jobmng\templates\jobs_index.html.py:145
+msgid "No jobs are available."
+msgstr "没有定义job"
+
+#: .\templates\admin\base.html.py:27
+msgid "Welcome,"
+msgstr "欢迎"
+
+#: .\templates\admin\base.html.py:32
+msgid "Documentation"
+msgstr "文档"
+
+#: .\templates\admin\base.html.py:40
+msgid "Change password"
+msgstr "修改密码"
+
+#: .\templates\admin\base.html.py:47
+msgid "Log out"
+msgstr "退出"
+
+#: .\templates\admin\base.html.py:55
+msgid "Home"
+msgstr ""
+
+#: .\templates\admin\base_site.html.py:4
+msgid "Topo Builder Admin"
+msgstr ""
+
+#: .\templates\admin\base_site.html.py:7
+msgid "Topo Builder"
+msgstr ""
+
+#: .\templates\admin\index.html.py:18
+#, python-format
+msgid "Models available in the %(name)s application."
+msgstr ""
+
+#: .\templates\admin\index.html.py:19
+#, python-format
+msgid "%(name)s"
+msgstr ""
+
+#: .\templates\admin\index.html.py:29
+msgid "Add"
+msgstr "增加"
+
+#: .\templates\admin\index.html.py:35
+msgid "Change"
+msgstr "修改"
+
+#: .\templates\admin\index.html.py:45
+msgid "You don't have permission to edit anything."
+msgstr "你没有权限编辑"
+
+#: .\templates\admin\index.html.py:53
+msgid "Recent Actions"
+msgstr "最近动作"
+
+#: .\templates\admin\index.html.py:54
+msgid "My Actions"
+msgstr "我的动作"
+
+#: .\templates\admin\index.html.py:58
+msgid "None available"
+msgstr "没有内容"
+
+#: .\templates\admin\index.html.py:72
+msgid "Unknown content"
+msgstr "未知内容"
+
+#: .\templates\static\directory_index.html.py:23
+msgid "Browse files"
+msgstr "浏览文件"

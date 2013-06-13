@@ -1,0 +1,157 @@
+{% load smart_if %}
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Topo Builder</title>
+<link rel="stylesheet" href="/static/style.css">
+<script type="text/javascript" src="/static/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="/static/jquery.tablesorter.min.js"></script> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% if auto_refresh %}
+	<meta http-equiv="refresh" content="5" />
+{% endif %}
+
+	<!--[if lt IE 7]>
+	<style media="screen" type="text/css">
+	#container {
+		height:100%;
+	}
+	</style>
+	<![endif]-->
+
+</head>
+<body>
+
+<div id="container">
+	<div id="header">
+		<div id="home"><a href="/">Topo Builder</a></div>
+		<div id="tools"> 
+		{% if auto_refresh %}
+			<a href="?refresh=false">{% trans 'Turn Off Refresh' %}</a>
+		{% else %}
+			<a href="?refresh=true">{% trans 'Turn On Refresh' %}</a>
+		{% endif %}
+		| <a href="/admin">{% trans 'Admin' %}</a>
+		| <a href="/static/help.html">{% trans 'Help' %}</a>
+		</div>	
+	</div>
+	
+	<div id="main">
+
+
+{% if running %}
+	<p>{% trans 'Builder is running' %}.
+	{% if user.is_staff %}
+		<a href="/jobmng/stopserver">{% trans 'Stop Builder' %}</a></p>
+	{% endif %}	
+{% else %}
+	<p>{% trans 'Builder is not running' %}.
+	{% if user.is_staff %}
+		<a href="/jobmng/startserver">{% trans 'Start Builder' %}</a></p>
+	{% endif %}	
+{% endif %}
+
+
+{% if job_list %}
+<table cellspacing="0" id="myTable">
+<thead>
+  <tr>
+  	<th>{% trans 'id' %}</th>
+    <th>{% trans 'name' %}</th>
+    <th>{% trans 'state' %}</th>
+    <th>{% trans 'build count' %}</th>
+    <th>{% trans 'lastbuild' %}</th>
+    <th>{% trans 'version' %}</th>
+    <th>{% trans 'success' %}</th>
+    <th>{% trans 'code' %}</th>
+    <th>{% trans 'phrase' %}</th>
+    <th>{% trans 'duration' %}</th>
+    <th>{% trans 'log' %}</th>
+    <th>{% trans 'artifact' %}</th>
+    <th>{% trans 'action' %}</th>
+  </tr>
+</thead>
+<tbody>
+  {% for build in build_list %}
+  	  {% if build.job.state == 'hide' %}
+	  	<tr class="{% cycle 'row1' 'row2' %} hide" style="display: none;">
+	  {% else %}
+	  	<tr class="{% cycle 'row1' 'row2' %}">
+	  {% endif %}
+	  	<td>{{build.job.id}}</td>
+	    <td><a href="/jobmng/{{build.job.id}}">{{ build.job.name|escape }}</a></td>
+	    <td>{{ build.job.state|escape }}</td>
+	    <td>{{ build.job_builds_count }}</td>
+	    {% if build.create_time %}
+	    	<td>{{ build.create_time|date:"Y-m-d H:i:s" }}</td>
+	    	<td>{{ build.version|escape }}</td>
+		    {% if job_running == build.job.id %}
+		    	<td colspan="4">{% trans 'building...' %}</td>
+		    {% else %}
+		    	{% if build.running %}
+		    		<td colspan="4">{% trans 'cancelled' %}</td>
+		    	{% else %}
+				    <td>
+				    	{% if build.success %}
+				    		<img src="/static/images/icon-yes.gif" />
+				    	{% else %}
+				    		<img src="/static/images/icon-no.gif" />
+				    	{% endif %}
+				    </td>
+				    <td>{{ build.code|escape }}</td>
+				    <td>{{ build.phrase|escape }}</td>
+				    <td>{{ build.duration|escape }}</td>
+			    {% endif %} 
+		    {% endif %} 
+		    <td><a href="/artifact/{{ build.job.id}}/{{ build.id}}/_topo_builder_log.txt"><img src="/static/images/log.png" title="{% trans 'view build log' %}" /></a></td>
+		    <td><a href="/artifact/{{ build.job.id}}/{{ build.id}}/"><img src="/static/images/folder.png" title="{% trans 'view artifact files' %}"  /></a></td>
+		{% else %}
+			<td colspan="8">{% trans 'No build yet.' %}</td>      
+	    {% endif %}
+	    
+		<td>
+		{% if job_running == -1 %}
+			<a href="/jobmng/dojob/{{ build.job.id}}"><img title="{% trans 'build now' %}" src="/static/images/run.png" /></a>
+		{% endif %}
+		{% if job_running == build.job.id and process_running != -1 %}
+			<a href="/jobmng/canceljob"><img title="{% trans 'cancel' %}" src="/static/images/cancel.png" /></a>
+		{% endif %}	
+		<!--
+		{% if user.is_staff %}
+			<a href="/jobmng/clear/{{ build.job.id}}" onclick="return confirm('{% trans 'clear the job' %}?')"><img src="/static/images/clear.png" title="{% trans 'clear the job' %}"/></a>
+		{% endif %}	
+		-->
+		</td>
+	  </tr>
+  {% endfor %}  
+</tbody>
+</table>
+
+<div>
+    <span>
+    	<input type="checkbox" id="show-hide-jobs">{% trans 'display hided jobs' %}</input>
+    </span>
+</div>
+
+{% else %}
+    <p>{% trans 'No jobs are available.' %}</p>
+{% endif %}
+
+	</div>
+	<div id="footer">
+	{{app_description}}
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  $("#myTable").tablesorter();
+  $("#show-hide-jobs").click( function () {
+  	$("tr.hide").toggle()
+  });  
+});
+</script>
+
+</body>
+</html>

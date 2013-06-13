@@ -1,0 +1,32 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <meta name="robots" content="NONE,NOARCHIVE" />
+	<link rel="stylesheet" href="/static/style.css">
+    <title>Index of {{ directory }}</title>
+</head>
+<body>
+
+<div id="container">
+	<div id="header">
+		<div id="home"><a href="/">Topo Builder</a></div>
+		<div id="tools"> 
+		<a href="/admin">{% trans 'Admin' %}</a>
+		| <a href="/static/help.html">{% trans 'Help' %}</a>
+		</div>	
+	</div>
+	
+	<div id="main">
+	    <p>{% trans 'Browse files' %}: {{ directory }}</p>
+	    <ul>
+	    {% for f in file_list %}
+	    <li><a href="{{ f }}">{{ f }}</a></li>
+	    {% endfor %}
+	    </ul>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+{% load smart_if %}
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Topo Builder Job: {{job.name|escape }}</title>
+<link rel="stylesheet" href="/static/style.css">
+<script type="text/javascript" src="/static/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="/static/jquery.tablesorter.min.js"></script> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% if auto_refresh %}
+	<meta http-equiv="refresh" content="5" />
+{% endif %}
+
+	<!--[if lt IE 7]>
+	<style media="screen" type="text/css">
+	#container {
+		height:100%;
+	}
+	</style>
+	<![endif]-->
+
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<div id="home"><a href="/">Topo Builder</a> &gt; {{job.name|escape }}</div>
+		<div id="tools"> 
+			{% if auto_refresh %}
+				<a href="?pageno={{pageno}}&pagesize={{pagesize}}&refresh=false">{% trans 'Turn Off Refresh' %}</a>
+			{% else %}
+				<a href="?pageno={{pageno}}&pagesize={{pagesize}}&refresh=true">{% trans 'Turn On Refresh' %}</a>
+			{% endif %}
+			| <a href="/admin">{% trans 'Admin' %}</a>
+			| <a href="/static/help.html">{% trans 'Help' %}</a>
+		</div>	
+	</div>
+	<div id="main">
+
+	{% if running %}
+		<p>{% trans 'Builder is running' %}</p>
+	{% else %}
+		<p>{% trans 'Builder is not running' %}</p>
+	{% endif %}
+
+{% if job %}
+	{% if build_list %}
+		<table cellspacing="0" id="myTable">
+		<thead>
+		  <tr>
+		  	<th><input type="checkbox" id="action-toggle" /></th>
+		  	<th>{% trans 'id' %}</th>
+		  	<th>{% trans 'version' %}</th>
+		    <th>{% trans 'build on' %}</th>
+		    <th>{% trans 'success' %}</th>
+		    <th>{% trans 'code' %}</th>
+		    <th>{% trans 'phrase' %}</th>
+		    <th>{% trans 'duration' %}</th>
+		    <th>{% trans 'log' %}</th>
+		    <th>{% trans 'artifact' %}</th>
+		    <th>{% trans 'action' %}</th>
+		    <th>{% trans 'custom cmd' %}</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  {% for build in build_list.object_list %}
+		  <tr class="{% cycle 'row1' 'row2' %}">
+		    <td><input type="checkbox" class="action-select" value="{{ build.id }}" /></td>
+		  	<td>{{ build.id }}</td>
+		  	<td>{{ build.version }}{% if build.published %}<img src="/static/images/published.png" />{% endif %}</td>
+		    <td>{{ build.create_time|date:"Y-m-d H:i:s"}}</td>
+		    {% if job_running == build.job.id  and build.running and forloop.counter == 1%}
+	    		<td colspan="4">{% trans 'building...' %}</td>
+	    	{% else %}
+	    		{% if build.running %}
+			    	<td colspan="4">{% trans 'cancelled' %}</td>
+		    	{% else %}
+				    <td>
+				    	{% if build.success %}
+				    		<img src="/static/images/icon-yes.gif" />
+				    	{% else %}
+				    		<img src="/static/images/icon-no.gif" />
+				    	{% endif %}
+				    </td>
+				    <td>{{ build.code|escape }}</td>
+				    <td>{{ build.phrase|escape }}</td>
+				    <td>{{ build.duration|escape }}</td>
+			    {% endif %}
+		    {% endif %}
+		    <td><a href="/artifact/{{ build.job.id}}/{{ build.id}}/_topo_builder_log.txt"><img src="/static/images/log.png" title="{% trans 'view build log' %}" /></a></td>
+		    <td><a href="/artifact/{{ build.job.id}}/{{ build.id}}/"><img src="/static/images/folder.png" title="{% trans 'view artifact files' %}"/></a></td>
+		    <td>
+		    	{% if build.success %}
+		    		<a href="/jobmng/publish/{{ build.id}}"><img src="/static/images/published.png" title="{% trans 'flag published' %}"/></a> 
+		    	{% endif %}
+		    
+		    	{% if job_running == -1%}
+		    		{% if build.version != "" %}
+		    			<a href="/jobmng/forcejob/{{ build.job.id}}/{{ build.version}}"><img src="/static/images/repeat.png" title="{% trans 'rebuild it' %}"/></a> 
+		    		{% endif %}	
+			    	{% if user.is_staff and not build.published %}
+			    		<a href="/jobmng/delete/{{ build.job.id}}/{{ build.id}}" onclick="return confirm('{% trans 'delete the build' %}?')"><img src="/static/images/delete.png" title="{% trans 'delete the build' %}"/></a>
+			    	{% endif %}		
+		    	{% else %}
+				    {% if job_running != build.job.id  or forloop.counter != 1%}
+				    	{% if user.is_staff and not build.published %}
+				    		<a href="/jobmng/delete/{{ build.job.id}}/{{ build.id}}" onclick="return confirm('{% trans 'delete the build' %}?')"><img src="/static/images/delete.png" title="{% trans 'delete the build' %}"/></a>
+				    	{% endif %}	
+			    	{% endif %}	
+		    	{% endif %}			    	
+		    </td>
+		    <td>
+		    	{% if job_running == -1%}
+		    		{% if job.custom_cmd1_cmd != "" %}
+		    			<a href="/jobmng/trigcmd/{{ build.job.id}}/{{ build.id}}/1"><img src="/static/images/cmd.png" title="{{ job.custom_cmd1_name }}"/></a> 
+		    		{% endif %}	
+		    		{% if job.custom_cmd2_cmd != "" %}
+		    			<a href="/jobmng/trigcmd/{{ build.job.id}}/{{ build.id}}/2"><img src="/static/images/cmd.png" title="{{ job.custom_cmd2_name }}"/></a> 
+		    		{% endif %}	
+		    		{% if job.custom_cmd3_cmd != "" %}
+		    			<a href="/jobmng/trigcmd/{{ build.job.id}}/{{ build.id}}/3"><img src="/static/images/cmd.png" title="{{ job.custom_cmd3_name }}"/></a> 
+		    		{% endif %}				    	
+		    	{% endif %}			    			    
+		    </td>
+		  </tr>
+		  {% endfor %}  
+		</tbody>
+		</table>
+
+		<div class="pagination">
+		    <span class="step-links">
+		        {% if build_list.has_previous %}
+	            	<a href="?pageno={{ build_list.previous_page_number }}&pagesize={{pagesize}}&refresh={{auto_refresh}}">{% trans 'previous page' %}</a>
+		        {% endif %}
+
+		        <span class="current">
+		            {{ build_list.number }} / {{ build_list.paginator.num_pages }}
+		        </span>
+
+		        {% if build_list.has_next %}
+	            	<a href="?pageno={{ build_list.next_page_number }}&pagesize={{pagesize}}&refresh={{auto_refresh}}">{% trans 'next page' %}</a>
+		        {% endif %}
+		        
+		        {% trans 'page size' %}
+				<select id="cmb_pagesize" onchange="location.href='?pageno=1&pagesize=' + document.getElementById('cmb_pagesize').value + '&refresh={{auto_refresh}}'">	
+					<option value="10" {% if pagesize == 10 %}selected="selected"{% endif %}>10</option>
+					<option value="20" {% if pagesize == 20 %}selected="selected"{% endif %}>20</option>
+					<option value="50" {% if pagesize == 50 %}selected="selected"{% endif %}>50</option>
+					<option value="100" {% if pagesize == 100 %}selected="selected"{% endif %}>100</option>
+					<option value="200" {% if pagesize == 200 %}selected="selected"{% endif %}>200</option>
+					<option value="500" {% if pagesize == 500 %}selected="selected"{% endif %}>500</option>
+				</select>		        
+		    </span>
+		    <span>
+		    	{% trans 'batch operation' %}
+				<select id="action-combox">	
+					<option></option>
+					<option value="delete">{% trans 'delete selected builds' %}</option>
+				</select>
+		    </span>
+		</div>
+
+	{% else %}
+	    <p>{% trans 'No build found' %}</p>
+	{% endif %}
+
+    <p>
+    {% trans 'Job created on' %}: {{ job.create_time|date:"Y-m-d" }} <br/>
+    {% trans 'type' %}: {{ job.type|escape }} <br/> 
+    {% trans 'schedule' %}: {{ job.schedule|escape }} <br/>  
+    {% trans 'state' %}: {{ job.state|escape }} <br/>
+    {% trans 'visit' %}: <a href="/workspace/{{job.id}}/">{% trans 'job workspace' %}</a><br/>
+    {% trans 'notes' %}: {{ job.notes|escape }}
+    </p>
+    
+
+	{% else %}
+	    <p>{% trans 'Job not found' %}</p>
+	{% endif %}
+
+	</div>
+	<div id="footer">
+	{{app_description}}
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  $("#myTable").tablesorter({ 
+	    headers: { 
+	        0: { 
+	            sorter: false 
+	        } 
+	    } 
+  }); 
+  $('#action-toggle').click(function () {
+	    if($("#action-toggle").attr('checked'))
+	    {
+	        $(".action-select").attr('checked', true);
+	    }
+	    else
+	    {
+	        $(".action-select").attr('checked', false);
+	    }
+  });
+  $("#action-combox").change( function () {
+    var option = $("#action-combox").val();
+    if(option.toLowerCase() == "delete"){
+    	if ($(".action-select:checked").size() > 0) {
+    		if (confirm('{% trans 'delete selected builds warning' %}'))
+        		location.href = "/jobmng/delete/{{job.id}}/" + $(".action-select:checked").map(function() {return this.value;}).get().join('_');
+        }
+        else
+        {
+        	alert("{% trans 'must select at least one build' %}");
+        }
+        $("#action-combox").val("");
+    }
+  });  
+});
+</script>
+
+
+</body>
+</html>

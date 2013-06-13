@@ -1,0 +1,1220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.1" />
+<title>Topo Builder</title>
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+div.paragraph{clear: both;}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revnumber, span#revdate, span#revremark {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #dddddd;
+  color: #777777;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #527bbd;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
+}
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Topo Builder</h1>
+<span id="author">Cloudtopo</span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_topo_builder">Topo Builder介绍</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Topo Builder是一个持续集成（Continuous Integration）工具，帮助研发团队更好的展开持续集成。</p></div>
+<div class="sect2">
+<h3 id="_">持续集成概念</h3>
+<div class="paragraph"><p>持续集成是一种研发实践，可以让团队对代码的修改不停的进行测试，不必等到开发周期后期才寻找和修复缺陷。通常一个典型的持续集成的过程是这样的：周期性的检测源代码版本服务器，发现有新提交的代码，则获取代码，开始编译，生成输出结果，在结果基础上进行测试，产生测试报告，并通知相关人员，我们把这样的一次过程称为构建。</p></div>
+<div class="paragraph"><p>在没有应用持续集成之前，传统的开发模式是等所有的代码都开发完成之后再集成到一起进行测试，这种传统的模式的弊端也很明显，由于很多bug在项目的早期就存在，到最后集成的时候才发现问题，开发人员需要在集成阶段花费大量的时间来寻找bug的根源，加上软件的复杂性的不断增加，问题的根源很难定位，甚至出现不得不调整底层架构的情况。</p></div>
+<div class="paragraph"><p>持续集成的关键是完全的自动化构建，获取源代码、编译、连接、测试，整个过程都应该自动完成。对于一次成功的构建，要求在这个自动化过程中的每一步都不能出错，而最重要的一步是测试，只有最后通过测试的构建才是成功的构建，这种测试的主要目的是为了验证构建的正确性，或者形象的说叫做“冒烟测试”。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_topo_builder_2">Topo Builder</h3>
+<div class="paragraph"><p>业界已经有很多持续集成工具，Topo Builder是Topo研发管理系统中专为持续集成提供的工具，也可以独立运行，它提供如下的功能：</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Topo Builder可以创建多个自动调度的构建任务，称作构建任务，或简称Job。
+</p>
+</li>
+<li>
+<p>
+每个Job可以设置类似Unix cron格式的调度器，非常灵活的来定时调度，调度条件满足时会自动运行，我们称一次这样的运行为构建或Build，构建也可以手动触发。
+</p>
+</li>
+<li>
+<p>
+Job可以定义和版本管理系统关联，这样构建时会去检测版本系统上是否有新的代码checkin，只有在满足构建的触发条件，才会运行构建。
+</p>
+</li>
+<li>
+<p>
+除了自动调度策略外，还可以在调度器时间未到时手动指定Job运行，甚至可以强制指定构建一个Job的历史版本，非常灵活。
+</p>
+</li>
+<li>
+<p>
+每个构建都会记录完整过程，这个完整log记录以及构建生成的目标文件都会被保存，log记录和构建目标文件在Web上可以方便的浏览和下载。
+</p>
+</li>
+<li>
+<p>
+构建成功与否可以非常灵活的定义，可以根据构建记录，构建命令返回值，或是构建花费时间，或任何Python表达式来灵活定义。
+</p>
+</li>
+<li>
+<p>
+构建结束后可以发送邮件，收件人可以在Job定义中预定义，可以根据构建成功或是失败定义不同的收件人。
+</p>
+</li>
+<li>
+<p>
+易用的Web界面，项目成员可以通过Web浏览任务及构建的结果，管理员可以通过Web配置构建任务。
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_job_build">Job和Build</h3>
+<div class="paragraph"><p>和其他持续集成系统一样，持续集成的关键是定义构建任务，我们也称之为Job，Job会定义一个任务的具体参数，如何调度等，只有定义了任务，Topo Builder才能实际的执行构建，每次构建称为Build，一个任务只要调度条件满足，就可以产生一个构建，所以一个Job会对应多次多次构建，Topo Builder也支持构建的手动触发，这就可以在调度时刻还未到时直接运行构建。</p></div>
+<div class="paragraph"><p>对于一个Job，真正调度运行的是一个用户提供的命令，这个命令可以是一个操作系统的命令，也可以是一个可执行文件，每次调度条件满足时，运行构建就是执行这条命令，Topo Builder会负责调度这个命令，并记录命令的输出，而具体命令所做的事情Topo Builder并不管，所以你可以用Job来做任何事情。</p></div>
+<div class="paragraph"><p>Topo Builder下可以定义多个Job，他们可以有不同的调度策略，当时间条件满足，它们都可以得到运行，但如果已经有一个Job在运行，Topo Builder不会触发其他Job的运行，也就是说某一时刻，只会有一个Job在运行，即使手工触发Job也不行。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">如果你想多个Job能同时调度，那么你可以运行两个Topo Builder，这样各自定义的任务就可以同时得到调度了。</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_topo_builder_3">开始使用Topo Builder</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="__2">安装和启动</h3>
+<div class="paragraph"><p>Topo Builder是一个服务程序，将下载得到的builder.zip解压缩，运行builder目录下的builder.bat就可以启动Topo Builder服务。</p></div>
+<div class="paragraph"><p>启动成功后可以看到下面的提示：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_start.png" alt="images/builder_start.png" />
+</div>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Topo Builder需要调用SVN的客户端程序，所以如果运行Topo Builder的机器上没有SVN程序的话，Builder在启动时会报错并提示：Topo Builder need SVN 1.6+, please install SVN command line client and run builder again。解决方法是：安装SVN客户端后再运行Topo就可以了。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>在我们不需要使用Topo Builder时，直接关闭这个程序就可以了，Topo Builder是一个绿色软件，因此如果安装的目录不合适，直接将Topo Builder的整个目录移动就可以了。卸载也很方便，删除目录就可以了。</p></div>
+<div class="paragraph"><p>在安装好的Topo Builder目录下，有两个重要的子目录workspace和artifact，workspace下保存job，artifact保存build，有些任务定义了和版本库关联，那么这些关联的目录都会在workspace下保存，构建运行时，产生的输出log和文件，都会记录在artifact目录下。</p></div>
+</div>
+<div class="sect2">
+<h3 id="__3">升级</h3>
+<div class="paragraph"><p>如果是从Topo Builder的老版本升级到新版本，请按照以下步骤：</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+将老版本的Builder停止
+</p>
+</li>
+<li>
+<p>
+解压缩新版本Builder到新的目录
+</p>
+</li>
+<li>
+<p>
+将老版本Builder下的builder\buidler.db拷贝到新版本下
+</p>
+</li>
+<li>
+<p>
+将老版本Builder下的workspace和artifact目录，拷贝到新版本下
+</p>
+</li>
+<li>
+<p>
+运行新版本Builder下的builder.bat文件启动新版本
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">如果新老Builder版本的数据库格式不一致，启动Builder时会显示Database version mismatch，这时按照提示执行数据库升级命令即可。</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__4">使用</h3>
+<div class="paragraph"><p>访问Topo Builder只需通过浏览器即可，如果是本机运行的Topo Builder，则直接访问http://localhost:8000就可以看到Topo Builder的基本界面，如下图：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_home.png" alt="images/builder_home.png" />
+</div>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Topo Builder缺省是使用8000端口，如果你的服务器上8000端口已经被占用，或者想在一台服务器上运行多个Topo Builder，那么可以通过加命令行参数的方法使用一个新端口，比如执行builder 8080就会使用8080端口，那么这时需要通过http://localhost:8080来访问Topo Builder。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>我们看到Topo Builder的主界面很简单，上面是工具条和Builder的运行状态，列出了最常用的几个命令，下面的主界面部分，列出了当前的所有定义的Job，以及每个Job最后一次构建（build）的结果，这样可以直观的看到当前所有构建任务的最新进展。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">上图的“停止Builder”按钮会让整个Builder的调度停止，但停止后，仍可以手工触发Job运行。注意这个按钮只有在登录以后才会显示，通过右上角的“管理”链接，并用管理员账号admin登录就可以了（初始密码也是admin），登录之后，相应的一些操作按钮才会显示。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>在第一次运行Topo Builder时，系统已经配置了一个叫做“ping测试”的Job，这只是为测试使用，在Job名字上单击，可以转到这个构建的详细结果页面，参考下图：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_job_detail.png" alt="images/builder_job_detail.png" />
+</div>
+</div>
+<div class="paragraph"><p>这里按时间顺序列出了这个Job的所有Build，每个Build，Topo Builder都保留了这次的Build的所有结果，这样我们可以方便的浏览这个Job历史上所有的构建。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">在Job页面还是Build页面都能看到一个id字段，这个id就对应了一个job和build的唯一标识，也是在磁盘上保存这个job和build的目录名，比如我们可以在Topo Builder的artifact/job_id/build_id 下找到一个构建的输出文件。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>在上述界面里，“动作”一栏下是可以针对build所做的操作，小旗子图标表示标识，常用来表示一个build是否发布给客户了，垃圾桶图标表示删除，删除一个build会自动删除其构建生成的文件，因此过时的build可以删除以节省磁盘空间，如果一个个删除太麻烦的话，可以用左侧的选择框来多选，多选之后可以选择页面下面的批量操作里的删除，就可以一次删除多个build。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">如果在“动作”一栏里看不到操作按钮，是因为还没有登录，点击页面右上角的登录，并用管理员账号admin登录就可以了（初始密码也是admin）。</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_job">创建Job</h3>
+<div class="paragraph"><p>接下来，我们来试着创建一个Job，点击工具栏上的"管理"，会进入Topo Builder的后台界面，第一次登录时需要输入账号密码，缺省的账号密码都是admin，然后进入后台后，参考下图：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_admin_home.png" alt="images/builder_admin_home.png" />
+</div>
+</div>
+<div class="paragraph"><p>这里，可以对Job，Build和Vcs和进行基本设置和查询，Setting下则保存基本的系统设置。我们先点击Jobs，这样我们就可以看到系统已经定义好的Job，目前我们只能看到“ping测试”，如下图：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_admin_job.png" alt="images/builder_admin_job.png" />
+</div>
+</div>
+<div class="paragraph"><p>这里我们可以看到每个Job的状态（state），类型（Type）和版本库类型（Vcs Type），这几个概念在下面创建一个Job时会详细解释，我们点击Add job来创建一个新的Job，可以看到下面的界面：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_admin_job_create.png" alt="images/builder_admin_job_create.png" />
+</div>
+</div>
+<div class="paragraph"><p>我们要定义一个最简单的Job，每隔10秒运行一次Windows的ver命令，我们在名称中填写“ver”，说明先留空，创建时间是Job的创建时间，我们点一下"今天"和"现在"就可以自动输入当前时间。</p></div>
+<div class="paragraph"><p>Job的类型，目前支持三种：Standard、Asynchronous或者External，Standard和Asynchronous类的job就是可以通过调度来定时运行的job，他们的区别在于有些job执行的外部命令会有不退出的子进程，这种情况就需要使用Asynchronous，否则Topo Builder会一直等待job的所有子进程退出而导致死锁。而External的任务是指一些通过别的方法调度的外部构建任务，这种任务不能通过Topo Builder来调度，而只是在任务完成时在Topo Builder中展现，这需要通过Topo Builder的一些扩展API来做，我们会在后面的章节来说明。这里我们使用缺省的Standard就好。</p></div>
+<div class="paragraph"><p>Job的状态，可以是Normal或者Disable，如果是Disable的话，Job就不会被调度了，所以这里我们选择Normal。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">如果我们选择Disable，虽然Job不能被自动调度了，但仍然可以手动触发，有些情况下，我们希望Job只能手动触发，就可以设置这里为Disable。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Job的调度这里需要填入一个cron格式的调度周期，cron是一种标准的定义调度周期的方法，它使用分为5段的字符串来表示一个任务应该在何时被调度，5段分别为分钟，小时，日，月和星期，比如我们写 0 18 3 5 \*就表示会在每年的 5月3日的18:00来运行任务，最后的\*是表示无论星期几都可以，标准的cron格式不支持秒，Topo Builder在cron基础上扩展了秒，所以是6段，对于我们要创建的这个Job，我们希望是每10秒执行一次，所以我们写 */10 * * * * * 就可以了。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">关于cron格式，下一章会详细解释，不要忘了Topo Builder支持秒级别的调度，所以比标准的cron格式多一段。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>接下来的Job关联的版本库类型，我们这个例子不需要版本库，所以选择None就好，如果我们的构建需要从版本库下载源码，那么需要设置这里到Subversion。</p></div>
+<div class="paragraph"><p>构建命令是在调度时间满足以后，就会执行的命令，我们在这里写ver就好了。</p></div>
+<div class="paragraph"><p>执行构建命令目录，对于ver命令，无论什么当前目录都没有关系，所以我们留空就好，如果你的构建需要在特定目录下运行，这里就需要指定好目录。</p></div>
+<div class="paragraph"><p>停止构建时强杀的进程，是指如果要在构建过程中停止构建需要强杀哪些进程，这个字符串会传递给Windows的taskkill命令作为参数，比如可以写windowtitle eq Topo。</p></div>
+<div class="paragraph"><p>输出文件是指一个Job所要输出的文件或目录的位置，这里可以写一个相对路径或绝对路径，如果是相对路径则是相对Job所在的Workspace目录，这个路径不管是一个文件还是一个目录，在构建成功时都会被拷贝到Build目录下保存，这样就可以在Topo Builder中得到每次历史构建的输出文件。我们的ver命令没有什么需要保存的，所以这里留空就好。</p></div>
+<div class="paragraph"><p>构建是否成功表达式是用来定义判断一个Job构建成功与否的表达式，这里实际上要写一个Python表达式，根据这个表达式返回True还是False来决定构建的结果，并且可以使用几个和build相关的变量，比如code表示构建命令的返回值，duration表示构建花费的时间，log是构建的整个log记录的字符串，我们的ver命令，我们就通过code来判断一下成功就好，我们在这里输入 code==0，这就表示当code为0时我们认为构建成功。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">我们可以在这里写很复杂的组合表达式，比如我们写 code==0 and re.search("success",log) != None 这就表示要求只有在code为0，并且log中包括success这样的字符串时，才认为构建成功。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>构建结果表达式是定义构建结果的表达式，构建的结果通常是一条简短的对构建结果进行描述的话，通常在构建失败时使用，比如失败时我们想知道具体的失败原因，并且显示在Topo Builder的界面中，就需要定义一个从log中抓取一个字符串的Python表达式，假设我们在我们自己的命令输出中用 @build_result@ 来表示这后面直到回车的内容为构建的失败原因，那么定义Phrase exp时，可以写re.search("@_build_result@ (.*)", log).group(1)就会将这些失败原因提取出来了，我们的ver命令不需要这个，留空就好了。</p></div>
+<div class="paragraph"><p>下面几个设置是设置构建成功或失败时给谁发送邮件以及调用的脚本，以及一些自定义的针对每个build可以做的命令，我们暂且留空好了，这样我们就完成了定义了一个每10秒执行一次的Job。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_job_2">运行Job</h3>
+<div class="paragraph"><p>定义完ver Job之后，点击左上角的Topo Builder回到主界面，我们就可以看到这个新的Job了，我们可以等待Topo Builder去根据设置好的cron调度策略去执行这个job，或者手动来触发这个job。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Topo Builder的调度器算法，是每5秒钟会加载一下所有的Job，所以每次修改Job后可能要稍等几秒才能看到Job参数的修改效果。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>我们只需要等待，只要Builder在运行中，就可以看到Topo Builder会不停触发这个Job了，当然也可以手动触发这个Job来运行。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">由于Builder在周期性调度Job的运行，因此要看到Job的实时状态，需要不停刷新浏览器，Topo Builder提供了自动重新刷新页面的选项，在页面右上角，看到的“开启自动刷新”就可以打开自动刷新，打开自动刷性之后，页面会每5秒被刷性一次。这样便于观察每个Job的实时调度情况。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>点击Job的名字，可以进入这个Job的页面，这里除了看到这个Job的历史build情况，页面下方也列出了Job的基本信息。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_job_build_2">管理Job和Build</h3>
+<div class="paragraph"><p>上面我们已经可以定义Job，并触发Job的运行，我们还可以在Admin页面中对Job和Build进行更多的管理，比如我们要删除一些历史上的Build，就可以在Admin页面中点击Build，然后就可以看到所有Build的状态：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_admin_build.png" alt="images/builder_admin_build.png" />
+</div>
+</div>
+<div class="paragraph"><p>这里列出了所有的Job的所有Build，可以在页面右边的Filter下做一些基本的过滤，比如按照Job或是按照成功与否，比如可以点击ver来只列出ver Job的所有Build。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">如果通过filter还不能找到我们想要的build，可以直接在上面的search栏中输入关键字来搜索build。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>选中我们想要删除的build，在Action中选择"删除了选定的builds"，那么就可以删除这些构建了。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">注意，如果是在后台删除一个build时是不会自动删除build所产生的log和输出文件的，只是从数据库中删除了这个build的记录，所有的build的log和输出文件都还在Topo Builder安装目录下的artifact子目录里按照job_id/build_id的方式保存着，因为如果需要删除build的输出文件和log，请在前台界面中使用删除build的按钮。</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="__5">版本库关联</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>上一章中定义的ver Job是一个简单的不使用版本库的Job，大部分持续集成需要和版本库关联。这一章会介绍如何和版本库关联。</p></div>
+<div class="sect2">
+<h3 id="__6">定义版本库关联</h3>
+<div class="paragraph"><p>如果要使用版本库，那么首先在定义Job时就要设置job的版本库类型，比如我们要使用Subversion，那么定义Job的Vcs Type时就要设置为Subversion。</p></div>
+<div class="paragraph"><p>定义好Job的Vcs Type之后，我们要为这个Job定义一些与版本库关联的目录，在Admin界面中，点击Vcss，选择创建一个vcs，就可以看到下面的界面了，这里就是定义版本库目录的地方：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_admin_vcs.png" alt="images/builder_admin_vcs.png" />
+</div>
+</div>
+<div class="paragraph"><p>在job这里选择这个版本库目录是为哪个Job定义的，如果还没有创建好job，可以点击这里右边的加号来创建一个新job。</p></div>
+<div class="paragraph"><p>名称只在显示时用，而不是用于文件系统的目录名，所以这里没有特别需要注意的地方。</p></div>
+<div class="paragraph"><p>版本库地址很重要，是对应版本库的目录路径，对于Subversion，就是Subversion的url，比如我们可以写svn://192.168.1.1/project/dir1。</p></div>
+<div class="paragraph"><p>本地路径是对应到本地的目录名，这里同样可以使用相对目录或绝对目录，如果是相对目录，则是位于对应job的workspace目录下，Topo Builder每次更新这个目录都会更新到这个目录下。</p></div>
+<div class="paragraph"><p>触发类型可以选择三种触发构建的方法，</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top">触发类型            </th>
+<th align="left" valign="top"> 含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">有新版本时触发构建</p></td>
+<td align="left" valign="top"><p class="table">这个目录只有在有更新时才会触发构建</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">无条件触发构建</p></td>
+<td align="left" valign="top"><p class="table">这个目录一定会触发构建</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">不触发构建</p></td>
+<td align="left" valign="top"><p class="table">这个目录本身不触发构建，但会在构建发生时被更新到新版本</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">在检测是否有新版本时，Topo Builder会使用所定义的目录来检测它的最新修改，而不是整个库，比如对于Subversion，每个目录都有最近一次修改的版本号，如果我们定义一个版本库地址到服务器版本库的一个子目录，那么当库上的其他目录有修改时，并不会触发Topo Builder的构建。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>构建时先Revert是指每次更新这个目录时都先恢复本地的目录，这可以防止某些本地目录在构建时被修改的情况。</p></div>
+</div>
+<div class="sect2">
+<h3 id="__7">多版本库关联</h3>
+<div class="paragraph"><p>Topo Builder可以为一个job定义多个版本库关联，这样一个job在执行时可以关联多个版本库目录。</p></div>
+<div class="paragraph"><p>多版本库关联时，版本会自动使用多个目录的最新的一个版本，比如两个目录A和B，那么如果触发构建，A和B会被更新到一个新的版本，这个新的版本是取决于A和B的最高一个版本，比如A的最新版本是215，B为219，那么A和B会一起被更新到219版本。</p></div>
+<div class="paragraph"><p>在定义多个版本库目录时，每个目录都可以定义自己的触发构建的类型，这些触发类型支持组合定义，比如我们定义了两个目录A和B，都定义为有新版本时触发构建，那么当A或者B有新版本时，都会触发构建，如果我们定义A为有新版本时触发构建，B为无条件触发构建，那么A的触发类型就会被忽略，因为B已经被定义了无条件触发构建，只要调度时间条件满足，总会构建，并且构建时自动将A和B更新到新版本。</p></div>
+<div class="paragraph"><p>再举一个例子，如果A为不触发构建，B为有新版本时触发构建，那么当A有新版本B没有新版本时，不会触发构建，而当B有新版本，A没有新版本时，则会触发构建，并且会将A和B都更新到新版本。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">在上面的例子中，如果A和B都有新版本，自然会触发构建，但这个时候，如果A的新版本比B高，那么A和B都会被更新到这个新的版本。也就是说，不触发构建的定义只是用来决定是否触发构建，但一旦触发构建的条件满足，所有的目录都会被统一刷新到最新的一个目录的版本，即使这个目录是定义为不触发构建。</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="__8">高级任务定义</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="__9">高级调度策略</h3>
+<div class="paragraph"><p>前面章节已经提到类cron格式的调度策略，cron格式的调度是非常灵活的，Topo Builder中使用这种格式，它的基本格式是用空格分隔的六段：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>*　　*　　*　　*　　*   *
+秒   分  小时  日  月   星期</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+秒取值在0-59，
+</p>
+</li>
+<li>
+<p>
+分取值在0-59
+</p>
+</li>
+<li>
+<p>
+小时取值在0-23
+</p>
+</li>
+<li>
+<p>
+日取值在1-31
+</p>
+</li>
+<li>
+<p>
+月取值在1-12
+</p>
+</li>
+<li>
+<p>
+星期取值在0-6（0表示星期天）
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>对于每一段，都可以写一个范围，当前时间落在这六段定义的范围内时，任务就会被调度运行了，范围的定义可以用下面几种格式（我们以秒为例）：</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+x  这是最简单的格式，就表示一定要是这一秒
+</p>
+</li>
+<li>
+<p>
+x,y 逗号分隔表示和的关系，比如2,8 就表示在第2和第8秒都会执行任务
+</p>
+</li>
+<li>
+<p>
+x-y 减号则是表示从一个值到另一个值的连续范围，比如 1-8 表示从第一秒到第8秒
+</p>
+</li>
+<li>
+<p>
+x-y/z  除号则表示“每”的意思，比如 0-9/2 就是从第0秒到第9秒每隔2秒
+</p>
+</li>
+<li>
+<p>
+\* 星号表示整个取值范围，比如 */3 就是每3秒的意思
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>看几个完整的例子</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>0 10 * * * *</tt></pre>
+</div></div>
+<div class="paragraph"><p>这个表示每小时的第10分定时运行，注意前面用0，后面用*是表示在10分0秒这个时刻来运行任务，而小时，日，月和星期则可任意。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">*和0的使用一定要考虑清楚，如果上面的例子前面的0改成*，即 \* 10 \* \* \* \*，那么意思就是10分这个完整的一分钟都会触发任务运行，对于Topo Builder，那么到了10分钟，这个任务就会不停运行，如果这个任务执行只需要几秒种，那么在这一分钟内，它会被运行多次，直到下一分钟才不会被调度。</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>下面是几个其他的例子：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>0 0,30 9-17 * * * 这表示从9点到17点，每隔半小时执行一次
+* * * * * * 这就是每秒运行一次
+0 */3 * * * 0 这表示星期天每隔三分钟执行一次
+0 0 0 13 * 5 这是表示每月13号且是星期5时，0点0分0秒运行</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="__10">强制构建</h3>
+<div class="paragraph"><p>Topo Builder允许为一个Job强制指定一个版本库版本的构建，这在某些场合下，可以用于重建一个历史的构建，比如当前构建已经升到版本3000，但通过强制构建可以重新开始一个2900版本的构建。</p></div>
+<div class="paragraph"><p>注意，强制构建一般并不常用，另外强制构建可能要将本地的文件‘降版本'，这些都可能带来一些问题，所以在Topo Builder界面中并没有提供强制构建入口，我们可以通过构造一个url来进入强制构建，比如我们安装了Topo Builder在 <a href="http://192.168.1.1:8000">http://192.168.1.1:8000</a> ，我们希望id为2的Job，能做一个强制构建，并构建版本2900，那么可以通过这样的url来运行：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>http://192.168.1.1:8000/jobmng/forcejob/2/2900</tt></pre>
+</div></div>
+<div class="paragraph"><p>注意，上面url在forcejob后面的两个参数分别为job id和要强制构建的版本库的版本号，通过这样的url，我们就可以做任意版本的强制构建了。</p></div>
+</div>
+<div class="sect2">
+<h3 id="__11">环境变量</h3>
+<div class="paragraph"><p>Topo Builder在调度一个任务运行时，会通过环境变量传入任务需要的参数，目前支持的几个参数，如下：</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top">变量                 </th>
+<th align="left" valign="top">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">topo_builder_job</p></td>
+<td align="left" valign="top"><p class="table">job的名字</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">topo_builder_ver</p></td>
+<td align="left" valign="top"><p class="table">job这次构建的版本号</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">topo_builder_artifact</p></td>
+<td align="left" valign="top"><p class="table">job这次构建的输出目录</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">topo_builder_job_id</p></td>
+<td align="left" valign="top"><p class="table">job的id</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">topo_builder_build_id</p></td>
+<td align="left" valign="top"><p class="table">这次构建的id</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>这些参数都在执行任务命令时可以从环境变量中获取并使用，比如我们可以创建一个job，执行命令 echo %topo_builder_job%, 这里就验证了环境变量的使用，通过查看这个job的log，我们就可以看到输出的结果。</p></div>
+</div>
+<div class="sect2">
+<h3 id="__12">钩子和插件</h3>
+<div class="paragraph"><p>Topo Builder支持通过用户提供的钩子函数来扩展功能，打开安装目录下的builder/jobsrv/hook.py，这个文件下就定义了几个钩子函数，下表给出它们的解释：</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top">钩子              </th>
+<th align="left" valign="top">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">pre_job_hook</p></td>
+<td align="left" valign="top"><p class="table">这个hook在job执行前被触发，返回False则不再执行下去了，参数是job, context</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">pre_do_job_hook</p></td>
+<td align="left" valign="top"><p class="table">这个hook在真正job执行前被触发，参数是job, build, context, logger</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">post_do_job_hook</p></td>
+<td align="left" valign="top"><p class="table">这个hook在真正job执行后被触发，参数是job, build, context, logger</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">post_job_hook</p></td>
+<td align="left" valign="top"><p class="table">这个hook在job执行完后触发，参数是job, build, context</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>这些钩子都需要通过Python来编写，job，build，context和logger是钩子函数被调用时的参数，job和build是相应的job和build对象，context是这次构建的上下文，是一个字典，logger是一个log函数，可以用来写一些log到这次构建的log文件。</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">注意logger这个参数在pre_job_hook和post_job_hook时都没有，是因为pre_job_hook被触发时log还没准备好，而post_job_hook被触发时，log已经关闭。</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="__13">系统设置</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Topo Builder有一些基本的系统设置，这一章介绍一下，在Admin界面中点击Settings，然后选择Topo Builder Setting，就可以看到下面的设置界面：</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/builder_admin_setting.png" alt="images/builder_admin_setting.png" />
+</div>
+</div>
+<div class="paragraph"><p>下面解释一下这些设置：</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+需要登录：这个表示是否登录用户才可以访问Topo Builder。
+</p>
+</li>
+<li>
+<p>
+Builder URL：用于设置Topo Builder所在的服务器url，这样在构建发送的邮件中可以包括这个url来让用户直接点击链接就可以进入Topo Builder，比如我们可以设置这个为http://192.168.1.1:8000。
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">这个URL不要设置为http://localhost:8000，这样的话收到邮件的开发人员可能会打不开这个链接。</td>
+</tr></table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+SMTP：下面的一组是smtp相关的设置，必须设置正确Topo Builder才可以发送邮件，我们以Gmail为例，那么设置如下即可：
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top">设置             </th>
+<th align="left" valign="top"> 值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Smtp server</p></td>
+<td align="left" valign="top"><p class="table">smtp.gmail.com</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Smtp port</p></td>
+<td align="left" valign="top"><p class="table">587</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Smtp username</p></td>
+<td align="left" valign="top"><p class="table">gmail帐户名，要加@gmail.com</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Smtp password</p></td>
+<td align="left" valign="top"><p class="table">gmail密码</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Smtp tls</p></td>
+<td align="left" valign="top"><p class="table">设置为true</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="__14">常见问题</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+运行builder.bat，服务程序已经启动起来，但是用浏览器访问http://localhost:8000，为何出错？
+</dt>
+<dd>
+<p>
+请检查你解压缩builder的完整目录名中是否包含中文或空格，如果有，除去中文和空格再尝试一下。
+</p>
+</dd>
+<dt class="hdlist1">
+使用浏览器可以看到Builder的界面，但是有些按钮，比如删除build的图标为什么看不到？
+</dt>
+<dd>
+<p>
+因为有些操作是需要登录后才看到，所以请先通过右上角的管理按钮登录Builder，缺省的登录账户和密码都是admin。
+</p>
+</dd>
+<dt class="hdlist1">
+我已经有一个Job了，能否根据这个Job创建一个新的Job？
+</dt>
+<dd>
+<p>
+在后台界面中，选择这个Job，修改适当的参数后，选择下面的“保存为新的”按钮，就可以保存一个新的Job，但如果这个Job有相应的版本库关联，也要将这些版本库一一打开，修改关联的Job，然后执行“保存为新的”。
+</p>
+</dd>
+<dt class="hdlist1">
+我已经点击了手动执行Job的按钮，为什么Job还不运行？
+</dt>
+<dd>
+<p>
+手动执行Job只是绕过了cron的定时调度，但对于版本库的构建策略还是一样遵循的，也就是说，如果你的Job定义了检测到新版本才构建的目录，那么点击了手动执行后，如果没有检测到版本库的新版本的话，是不会运行的。
+</p>
+</dd>
+<dt class="hdlist1">
+绑定到Svn库的时候，我的库是通过Https访问的，为什么总是取不下来版本？
+</dt>
+<dd>
+<p>
+Https访问的Svn库需要服务器端有正确的证书，并且这个证书要和服务器的名称匹配（比如域名或者ip地址）。
+</p>
+</dd>
+</dl></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-05-29 15:39:44 中国标准时间
+</div>
+</div>
+</body>
+</html>
