@@ -2,7 +2,7 @@
 
 Topo Builder是一个持续集成（Continuous Integration）工具，帮助研发团队更好的展开持续集成。
 
-![](https://github.com/cloudtopo/topo-builder/blob/master/builder/static/images/builder_home.png)
+![](https://github.com/cloudtopo/topo-builder/raw/master/builder/static/images/builder_home.png)
 
 * Topo Builder可以创建多个自动调度的构建任务。
 * 构建任务可以设置类似Unix cron格式的调度器，非常灵活的来定时调度。还可以手动指定Job运行，甚至可以强制指定构建任意历史版本。
