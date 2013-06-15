@@ -1,22 +1,13 @@
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  Topo Builder文档编译说明： 
-//     1. asciidoc.py -a toc help.txt 
-//     2. 打开生成的help.html, 将其中的
-//           h3 + * { clear: left; }
-//        替换为
-//           div.paragraph{clear: both;}
-//        将 p的margin-top和margin-bottom改为0.7em，会让段落更好看。
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Topo Builder
-============
-Cloudtopo
+# Topo Builder
 
-== Topo Builder介绍
+Copyright [Cloudtopo](http://www.cloudtopo.com) 2008-2013 
+
+## 介绍
 
 Topo Builder是一个持续集成（Continuous Integration）工具，帮助研发团队更好的展开持续集成。
 
-=== 持续集成概念
+### 持续集成概念
 
 持续集成是一种研发实践，可以让团队对代码的修改不停的进行测试，不必等到开发周期后期才寻找和修复缺陷。通常一个典型的持续集成的过程是这样的：周期性的检测源代码版本服务器，发现有新提交的代码，则获取代码，开始编译，生成输出结果，在结果基础上进行测试，产生测试报告，并通知相关人员，我们把这样的一次过程称为构建。
 
@@ -24,7 +15,7 @@ Topo Builder是一个持续集成（Continuous Integration）工具，帮助研�
 
 持续集成的关键是完全的自动化构建，获取源代码、编译、连接、测试，整个过程都应该自动完成。对于一次成功的构建，要求在这个自动化过程中的每一步都不能出错，而最重要的一步是测试，只有最后通过测试的构建才是成功的构建，这种测试的主要目的是为了验证构建的正确性，或者形象的说叫做“冒烟测试”。
 
-=== Topo Builder
+### Topo Builder
 
 业界已经有很多持续集成工具，Topo Builder是Topo研发管理系统中专为持续集成提供的工具，也可以独立运行，它提供如下的功能：
 
@@ -38,7 +29,7 @@ Topo Builder是一个持续集成（Continuous Integration）工具，帮助研�
 * 易用的Web界面，项目成员可以通过Web浏览任务及构建的结果，管理员可以通过Web配置构建任务。
 
 
-=== Job和Build
+### Job和Build
 
 和其他持续集成系统一样，持续集成的关键是定义构建任务，我们也称之为Job，Job会定义一个任务的具体参数，如何调度等，只有定义了任务，Topo Builder才能实际的执行构建，每次构建称为Build，一个任务只要调度条件满足，就可以产生一个构建，所以一个Job会对应多次多次构建，Topo Builder也支持构建的手动触发，这就可以在调度时刻还未到时直接运行构建。
 
@@ -46,24 +37,25 @@ Topo Builder是一个持续集成（Continuous Integration）工具，帮助研�
 
 Topo Builder下可以定义多个Job，他们可以有不同的调度策略，当时间条件满足，它们都可以得到运行，但如果已经有一个Job在运行，Topo Builder不会触发其他Job的运行，也就是说某一时刻，只会有一个Job在运行，即使手工触发Job也不行。
 
-NOTE: 如果你想多个Job能同时调度，那么你可以运行两个Topo Builder，这样各自定义的任务就可以同时得到调度了。
+>NOTE: 如果你想多个Job能同时调度，那么你可以运行两个Topo Builder，这样各自定义的任务就可以同时得到调度了。
 
-== 开始使用Topo Builder
-=== 安装和启动
+## 开始使用Topo Builder
+
+### 安装和启动
 
 Topo Builder是一个服务程序，将下载得到的builder.zip解压缩，运行builder目录下的builder.bat就可以启动Topo Builder服务。
 
 启动成功后可以看到下面的提示：
 
-image::images/builder_start.png[]
+![](/static/images/builder_start.png)
 
-NOTE: Topo Builder需要调用SVN的客户端程序，所以如果运行Topo Builder的机器上没有SVN程序的话，Builder在启动时会报错并提示：Topo Builder need SVN 1.6+, please install SVN command line client and run builder again。解决方法是：安装SVN客户端后再运行Topo就可以了。
+>NOTE: Topo Builder需要调用SVN的客户端程序，所以如果运行Topo Builder的机器上没有SVN程序的话，Builder在启动时会报错并提示：Topo Builder need SVN 1.6+, please install SVN command line client and run builder again。解决方法是：安装SVN客户端后再运行Topo就可以了。
 
 在我们不需要使用Topo Builder时，直接关闭这个程序就可以了，Topo Builder是一个绿色软件，因此如果安装的目录不合适，直接将Topo Builder的整个目录移动就可以了。卸载也很方便，删除目录就可以了。
 
 在安装好的Topo Builder目录下，有两个重要的子目录workspace和artifact，workspace下保存job，artifact保存build，有些任务定义了和版本库关联，那么这些关联的目录都会在workspace下保存，构建运行时，产生的输出log和文件，都会记录在artifact目录下。
 
-=== 升级
+### 升级
 
 如果是从Topo Builder的老版本升级到新版本，请按照以下步骤：
 
@@ -73,58 +65,60 @@ NOTE: Topo Builder需要调用SVN的客户端程序，所以如果运行Topo Bui
 * 将老版本Builder下的workspace和artifact目录，拷贝到新版本下
 * 运行新版本Builder下的builder.bat文件启动新版本
 
-NOTE: 如果新老Builder版本的数据库格式不一致，启动Builder时会显示Database version mismatch，这时按照提示执行数据库升级命令即可。
 
-=== 使用
+>NOTE: 如果新老Builder版本的数据库格式不一致，启动Builder时会显示Database version mismatch，这时按照提示执行数据库升级命令即可。
+
+
+### 使用
 
 访问Topo Builder只需通过浏览器即可，如果是本机运行的Topo Builder，则直接访问http://localhost:8000就可以看到Topo Builder的基本界面，如下图：
 
-image::images/builder_home.png[]
+![](/static/images/builder_home.png)
 
-NOTE: Topo Builder缺省是使用8000端口，如果你的服务器上8000端口已经被占用，或者想在一台服务器上运行多个Topo Builder，那么可以通过加命令行参数的方法使用一个新端口，比如执行builder 8080就会使用8080端口，那么这时需要通过http://localhost:8080来访问Topo Builder。
+>NOTE: Topo Builder缺省是使用8000端口，如果你的服务器上8000端口已经被占用，或者想在一台服务器上运行多个Topo Builder，那么可以通过加命令行参数的方法使用一个新端口，比如执行builder 8080就会使用8080端口，那么这时需要通过http://localhost:8080来访问Topo Builder。
 
 我们看到Topo Builder的主界面很简单，上面是工具条和Builder的运行状态，列出了最常用的几个命令，下面的主界面部分，列出了当前的所有定义的Job，以及每个Job最后一次构建（build）的结果，这样可以直观的看到当前所有构建任务的最新进展。
 
-NOTE: 上图的“停止Builder”按钮会让整个Builder的调度停止，但停止后，仍可以手工触发Job运行。注意这个按钮只有在登录以后才会显示，通过右上角的“管理”链接，并用管理员账号admin登录就可以了（初始密码也是admin），登录之后，相应的一些操作按钮才会显示。
+>NOTE: 上图的“停止Builder”按钮会让整个Builder的调度停止，但停止后，仍可以手工触发Job运行。注意这个按钮只有在登录以后才会显示，通过右上角的“管理”链接，并用管理员账号admin登录就可以了（初始密码也是admin），登录之后，相应的一些操作按钮才会显示。
 
 在第一次运行Topo Builder时，系统已经配置了一个叫做“ping测试”的Job，这只是为测试使用，在Job名字上单击，可以转到这个构建的详细结果页面，参考下图：
 
-image::images/builder_job_detail.png[]
+![](/static/images/builder_job_detail.png)
 
 这里按时间顺序列出了这个Job的所有Build，每个Build，Topo Builder都保留了这次的Build的所有结果，这样我们可以方便的浏览这个Job历史上所有的构建。
 
-NOTE: 在Job页面还是Build页面都能看到一个id字段，这个id就对应了一个job和build的唯一标识，也是在磁盘上保存这个job和build的目录名，比如我们可以在Topo Builder的artifact/job_id/build_id 下找到一个构建的输出文件。
+>NOTE: 在Job页面还是Build页面都能看到一个id字段，这个id就对应了一个job和build的唯一标识，也是在磁盘上保存这个job和build的目录名，比如我们可以在Topo Builder的artifact/job\_id/build\_id 下找到一个构建的输出文件。
 
 在上述界面里，“动作”一栏下是可以针对build所做的操作，小旗子图标表示标识，常用来表示一个build是否发布给客户了，垃圾桶图标表示删除，删除一个build会自动删除其构建生成的文件，因此过时的build可以删除以节省磁盘空间，如果一个个删除太麻烦的话，可以用左侧的选择框来多选，多选之后可以选择页面下面的批量操作里的删除，就可以一次删除多个build。
 
-NOTE: 如果在“动作”一栏里看不到操作按钮，是因为还没有登录，点击页面右上角的登录，并用管理员账号admin登录就可以了（初始密码也是admin）。
+>NOTE: 如果在“动作”一栏里看不到操作按钮，是因为还没有登录，点击页面右上角的登录，并用管理员账号admin登录就可以了（初始密码也是admin）。
 
 
-=== 创建Job
+### 创建Job
 
 接下来，我们来试着创建一个Job，点击工具栏上的"管理"，会进入Topo Builder的后台界面，第一次登录时需要输入账号密码，缺省的账号密码都是admin，然后进入后台后，参考下图：
 
-image::images/builder_admin_home.png[]
+![](/static/images/builder_admin_home.png)
 
 这里，可以对Job，Build和Vcs和进行基本设置和查询，Setting下则保存基本的系统设置。我们先点击Jobs，这样我们就可以看到系统已经定义好的Job，目前我们只能看到“ping测试”，如下图：
 
-image::images/builder_admin_job.png[]
+![](/static/images/builder_admin_job.png)
 	
 这里我们可以看到每个Job的状态（state），类型（Type）和版本库类型（Vcs Type），这几个概念在下面创建一个Job时会详细解释，我们点击Add job来创建一个新的Job，可以看到下面的界面：
 
-image::images/builder_admin_job_create.png[]
+![](/static/images/builder_admin_job_create.png)
 
 我们要定义一个最简单的Job，每隔10秒运行一次Windows的ver命令，我们在名称中填写“ver”，说明先留空，创建时间是Job的创建时间，我们点一下"今天"和"现在"就可以自动输入当前时间。
 
 Job的类型，目前支持三种：Standard、Asynchronous或者External，Standard和Asynchronous类的job就是可以通过调度来定时运行的job，他们的区别在于有些job执行的外部命令会有不退出的子进程，这种情况就需要使用Asynchronous，否则Topo Builder会一直等待job的所有子进程退出而导致死锁。而External的任务是指一些通过别的方法调度的外部构建任务，这种任务不能通过Topo Builder来调度，而只是在任务完成时在Topo Builder中展现，这需要通过Topo Builder的一些扩展API来做，我们会在后面的章节来说明。这里我们使用缺省的Standard就好。
 
-Job的状态，可以是Normal或者Disable，如果是Disable的话，Job就不会被调度了，所以这里我们选择Normal。
+Job的状态，可以是Normal、Disable或者Hide，如果是Disable或者Hide的话，Job就不会被调度了，如果是Hide，则在Builder主界面也不再会显示了，这常常用于一些过时的Job，又不想删除。现在我们这里先选择Normal。
 
-NOTE: 如果我们选择Disable，虽然Job不能被自动调度了，但仍然可以手动触发，有些情况下，我们希望Job只能手动触发，就可以设置这里为Disable。
+>NOTE: 如果我们选择Disable，虽然Job不能被自动调度了，但仍然可以手动触发，有些情况下，我们希望Job只能手动触发，就可以设置这里为Disable。
 
 Job的调度这里需要填入一个cron格式的调度周期，cron是一种标准的定义调度周期的方法，它使用分为5段的字符串来表示一个任务应该在何时被调度，5段分别为分钟，小时，日，月和星期，比如我们写 0 18 3 5 \*就表示会在每年的 5月3日的18:00来运行任务，最后的\*是表示无论星期几都可以，标准的cron格式不支持秒，Topo Builder在cron基础上扩展了秒，所以是6段，对于我们要创建的这个Job，我们希望是每10秒执行一次，所以我们写 */10 * * * * * 就可以了。 
 
-NOTE: 关于cron格式，下一章会详细解释，不要忘了Topo Builder支持秒级别的调度，所以比标准的cron格式多一段。
+>NOTE: 关于cron格式，下一章会详细解释，不要忘了Topo Builder支持秒级别的调度，所以比标准的cron格式多一段。
 
 接下来的Job关联的版本库类型，我们这个例子不需要版本库，所以选择None就好，如果我们的构建需要从版本库下载源码，那么需要设置这里到Subversion。
 
@@ -138,50 +132,50 @@ NOTE: 关于cron格式，下一章会详细解释，不要忘了Topo Builder支�
 
 构建是否成功表达式是用来定义判断一个Job构建成功与否的表达式，这里实际上要写一个Python表达式，根据这个表达式返回True还是False来决定构建的结果，并且可以使用几个和build相关的变量，比如code表示构建命令的返回值，duration表示构建花费的时间，log是构建的整个log记录的字符串，我们的ver命令，我们就通过code来判断一下成功就好，我们在这里输入 code==0，这就表示当code为0时我们认为构建成功。
 
-NOTE: 我们可以在这里写很复杂的组合表达式，比如我们写 code==0 and re.search("success",log) != None 这就表示要求只有在code为0，并且log中包括success这样的字符串时，才认为构建成功。
+>NOTE: 我们可以在这里写很复杂的组合表达式，比如我们写 code==0 and re.search("success",log) != None 这就表示要求只有在code为0，并且log中包括success这样的字符串时，才认为构建成功。
 
-构建结果表达式是定义构建结果的表达式，构建的结果通常是一条简短的对构建结果进行描述的话，通常在构建失败时使用，比如失败时我们想知道具体的失败原因，并且显示在Topo Builder的界面中，就需要定义一个从log中抓取一个字符串的Python表达式，假设我们在我们自己的命令输出中用 @build_result@ 来表示这后面直到回车的内容为构建的失败原因，那么定义Phrase exp时，可以写re.search("@_build_result@ (.*)", log).group(1)就会将这些失败原因提取出来了，我们的ver命令不需要这个，留空就好了。
+构建结果表达式是定义构建结果的表达式，构建的结果通常是一条简短的对构建结果进行描述的话，通常在构建失败时使用，比如失败时我们想知道具体的失败原因，并且显示在Topo Builder的界面中，就需要定义一个从log中抓取一个字符串的Python表达式，假设我们在我们自己的命令输出中用 @build\_result@ 来表示这后面直到回车的内容为构建的失败原因，那么定义Phrase exp时，可以写re.search("@\_build\_result@ (.*)", log).group(1)就会将这些失败原因提取出来了，我们的ver命令不需要这个，留空就好了。
 
 下面几个设置是设置构建成功或失败时给谁发送邮件以及调用的脚本，以及一些自定义的针对每个build可以做的命令，我们暂且留空好了，这样我们就完成了定义了一个每10秒执行一次的Job。
 
-=== 运行Job
+### 运行Job
 
 定义完ver Job之后，点击左上角的Topo Builder回到主界面，我们就可以看到这个新的Job了，我们可以等待Topo Builder去根据设置好的cron调度策略去执行这个job，或者手动来触发这个job。
 
-NOTE: Topo Builder的调度器算法，是每5秒钟会加载一下所有的Job，所以每次修改Job后可能要稍等几秒才能看到Job参数的修改效果。
+>NOTE: Topo Builder的调度器算法，是每5秒钟会加载一下所有的Job，所以每次修改Job后可能要稍等几秒才能看到Job参数的修改效果。
 
 我们只需要等待，只要Builder在运行中，就可以看到Topo Builder会不停触发这个Job了，当然也可以手动触发这个Job来运行。
 
-NOTE: 由于Builder在周期性调度Job的运行，因此要看到Job的实时状态，需要不停刷新浏览器，Topo Builder提供了自动重新刷新页面的选项，在页面右上角，看到的“开启自动刷新”就可以打开自动刷新，打开自动刷性之后，页面会每5秒被刷性一次。这样便于观察每个Job的实时调度情况。
+>NOTE: 由于Builder在周期性调度Job的运行，因此要看到Job的实时状态，需要不停刷新浏览器，Topo Builder提供了自动重新刷新页面的选项，在页面右上角，看到的“开启自动刷新”就可以打开自动刷新，打开自动刷性之后，页面会每5秒被刷性一次。这样便于观察每个Job的实时调度情况。
 
 点击Job的名字，可以进入这个Job的页面，这里除了看到这个Job的历史build情况，页面下方也列出了Job的基本信息。
 
-=== 管理Job和Build
+### 管理Job和Build
 
 上面我们已经可以定义Job，并触发Job的运行，我们还可以在Admin页面中对Job和Build进行更多的管理，比如我们要删除一些历史上的Build，就可以在Admin页面中点击Build，然后就可以看到所有Build的状态：
 
-image::images/builder_admin_build.png[]
+![](/static/images/builder_admin_build.png)
 
 这里列出了所有的Job的所有Build，可以在页面右边的Filter下做一些基本的过滤，比如按照Job或是按照成功与否，比如可以点击ver来只列出ver Job的所有Build。
 
-NOTE: 如果通过filter还不能找到我们想要的build，可以直接在上面的search栏中输入关键字来搜索build。
+>NOTE: 如果通过filter还不能找到我们想要的build，可以直接在上面的search栏中输入关键字来搜索build。
 
 选中我们想要删除的build，在Action中选择"删除了选定的builds"，那么就可以删除这些构建了。
 
-NOTE: 注意，如果是在后台删除一个build时是不会自动删除build所产生的log和输出文件的，只是从数据库中删除了这个build的记录，所有的build的log和输出文件都还在Topo Builder安装目录下的artifact子目录里按照job_id/build_id的方式保存着，因为如果需要删除build的输出文件和log，请在前台界面中使用删除build的按钮。
+>NOTE: 注意，如果是在后台删除一个build时是不会自动删除build所产生的log和输出文件的，只是从数据库中删除了这个build的记录，所有的build的log和输出文件都还在Topo Builder安装目录下的artifact子目录里按照job\_id/build\_id的方式保存着，因为如果需要删除build的输出文件和log，请在前台界面中使用删除build的按钮。
 
 
-== 版本库关联
+## 版本库关联
 
-上一章中定义的ver Job是一个简单的不使用版本库的Job，大部分持续集成需要和版本库关联。这一章会介绍如何和版本库关联。
+上一章中定义的Job是一个简单的不使用版本库的Job，大部分持续集成需要和版本库关联。这一章会介绍如何和版本库关联。
 
-=== 定义版本库关联
+### 定义版本库关联
 
 如果要使用版本库，那么首先在定义Job时就要设置job的版本库类型，比如我们要使用Subversion，那么定义Job的Vcs Type时就要设置为Subversion。
 
 定义好Job的Vcs Type之后，我们要为这个Job定义一些与版本库关联的目录，在Admin界面中，点击Vcss，选择创建一个vcs，就可以看到下面的界面了，这里就是定义版本库目录的地方：
 
-image::images/builder_admin_vcs.png[]
+![](/static/images/builder_admin_vcs.png)
 
 在job这里选择这个版本库目录是为哪个Job定义的，如果还没有创建好job，可以点击这里右边的加号来创建一个新job。
 
@@ -193,19 +187,18 @@ image::images/builder_admin_vcs.png[]
 
 触发类型可以选择三种触发构建的方法，
 
-[options="header"]
-|=======================
-|触发类型            | 含义                       
-|有新版本时触发构建  | 这个目录只有在有更新时才会触发构建
-|无条件触发构建      | 这个目录一定会触发构建
-|不触发构建          | 这个目录本身不触发构建，但会在构建发生时被更新到新版本
-|=======================
+<table>
+<tr><th>触发类型</th><th>含义</th></tr>                       
+<tr><td>有新版本时触发构建</td><td>这个目录只有在有更新时才会触发构建</td></tr>
+<tr><td>无条件触发构建</td><td>这个目录一定会触发构建</td></tr>
+<tr><td>不触发构建</td><td>这个目录本身不触发构建，但会在构建发生时被更新到新版本</td></tr>
+</table>
 
-NOTE: 在检测是否有新版本时，Topo Builder会使用所定义的目录来检测它的最新修改，而不是整个库，比如对于Subversion，每个目录都有最近一次修改的版本号，如果我们定义一个版本库地址到服务器版本库的一个子目录，那么当库上的其他目录有修改时，并不会触发Topo Builder的构建。
+>NOTE: 在检测是否有新版本时，Topo Builder会使用所定义的目录来检测它的最新修改，而不是整个库，比如对于Subversion，每个目录都有最近一次修改的版本号，如果我们定义一个版本库地址到服务器版本库的一个子目录，那么当库上的其他目录有修改时，并不会触发Topo Builder的构建。
 
 构建时先Revert是指每次更新这个目录时都先恢复本地的目录，这可以防止某些本地目录在构建时被修改的情况。
 
-=== 多版本库关联
+### 多版本库关联
 
 Topo Builder可以为一个job定义多个版本库关联，这样一个job在执行时可以关联多个版本库目录。
 
@@ -215,17 +208,18 @@ Topo Builder可以为一个job定义多个版本库关联，这样一个job在�
 
 再举一个例子，如果A为不触发构建，B为有新版本时触发构建，那么当A有新版本B没有新版本时，不会触发构建，而当B有新版本，A没有新版本时，则会触发构建，并且会将A和B都更新到新版本。
 
-NOTE: 在上面的例子中，如果A和B都有新版本，自然会触发构建，但这个时候，如果A的新版本比B高，那么A和B都会被更新到这个新的版本。也就是说，不触发构建的定义只是用来决定是否触发构建，但一旦触发构建的条件满足，所有的目录都会被统一刷新到最新的一个目录的版本，即使这个目录是定义为不触发构建。
+>NOTE: 在上面的例子中，如果A和B都有新版本，自然会触发构建，但这个时候，如果A的新版本比B高，那么A和B都会被更新到这个新的版本。也就是说，不触发构建的定义只是用来决定是否触发构建，但一旦触发构建的条件满足，所有的目录都会被统一刷新到最新的一个目录的版本，即使这个目录是定义为不触发构建。
 
 
-== 高级任务定义
-=== 高级调度策略
+## 高级任务定义
+
+### 高级调度策略
 
 前面章节已经提到类cron格式的调度策略，cron格式的调度是非常灵活的，Topo Builder中使用这种格式，它的基本格式是用空格分隔的六段：
-----------------------------
+```
 *　　*　　*　　*　　*   *
 秒   分  小时  日  月   星期
-----------------------------
+```
 
 * 秒取值在0-59，
 * 分取值在0-59
@@ -240,109 +234,107 @@ NOTE: 在上面的例子中，如果A和B都有新版本，自然会触发构建
 * x,y 逗号分隔表示和的关系，比如2,8 就表示在第2和第8秒都会执行任务
 * x-y 减号则是表示从一个值到另一个值的连续范围，比如 1-8 表示从第一秒到第8秒
 * x-y/z  除号则表示“每”的意思，比如 0-9/2 就是从第0秒到第9秒每隔2秒
-* \* 星号表示整个取值范围，比如 */3 就是每3秒的意思
+* * 星号表示整个取值范围，比如 */3 就是每3秒的意思
 
 看几个完整的例子
-----------------------------
+```
 0 10 * * * * 
-----------------------------
+```
 这个表示每小时的第10分定时运行，注意前面用0，后面用*是表示在10分0秒这个时刻来运行任务，而小时，日，月和星期则可任意。
 
-NOTE: \*和0的使用一定要考虑清楚，如果上面的例子前面的0改成\*，即 \* 10 \* \* \* \*，那么意思就是10分这个完整的一分钟都会触发任务运行，对于Topo Builder，那么到了10分钟，这个任务就会不停运行，如果这个任务执行只需要几秒种，那么在这一分钟内，它会被运行多次，直到下一分钟才不会被调度。
+>NOTE: \*和0的使用一定要考虑清楚，如果上面的例子前面的0改成\*，即 \* 10 \* \* \* \*，那么意思就是10分这个完整的一分钟都会触发任务运行，对于Topo Builder，那么到了10分钟，这个任务就会不停运行，如果这个任务执行只需要几秒种，那么在这一分钟内，它会被运行多次，直到下一分钟才不会被调度。
 
 下面是几个其他的例子：
-----------------------------
+```
 0 0,30 9-17 * * * 这表示从9点到17点，每隔半小时执行一次
 * * * * * * 这就是每秒运行一次 
 0 */3 * * * 0 这表示星期天每隔三分钟执行一次
 0 0 0 13 * 5 这是表示每月13号且是星期5时，0点0分0秒运行
-----------------------------
+```
 
-=== 强制构建
+### 强制构建
 
 Topo Builder允许为一个Job强制指定一个版本库版本的构建，这在某些场合下，可以用于重建一个历史的构建，比如当前构建已经升到版本3000，但通过强制构建可以重新开始一个2900版本的构建。
 
 注意，强制构建一般并不常用，另外强制构建可能要将本地的文件‘降版本'，这些都可能带来一些问题，所以在Topo Builder界面中并没有提供强制构建入口，我们可以通过构造一个url来进入强制构建，比如我们安装了Topo Builder在 http://192.168.1.1:8000 ，我们希望id为2的Job，能做一个强制构建，并构建版本2900，那么可以通过这样的url来运行：
 
-----------------------------
+```
 http://192.168.1.1:8000/jobmng/forcejob/2/2900
-----------------------------
+```
 
 注意，上面url在forcejob后面的两个参数分别为job id和要强制构建的版本库的版本号，通过这样的url，我们就可以做任意版本的强制构建了。
 
-=== 环境变量
+### 环境变量
 
 Topo Builder在调度一个任务运行时，会通过环境变量传入任务需要的参数，目前支持的几个参数，如下：
 
-[options="header"]
-|=======================
-|变量                 |含义                       
-|topo_builder_job     |job的名字
-|topo_builder_ver     |job这次构建的版本号
-|topo_builder_artifact|job这次构建的输出目录
-|topo_builder_job_id  |job的id
-|topo_builder_build_id|这次构建的id
-|=======================
+<table>
+<tr><th>变量</th><th>含义 </th></tr>                      
+<tr><td>topo_builder_job</td><td>job的名字</th></tr>
+<tr><td>topo_builder_ver</td><td>job这次构建的版本号</th></tr>
+<tr><td>topo_builder_artifact</td><td>job这次构建的输出目录</th></tr>
+<tr><td>topo_builder_job_id</td><td>job的id</th></tr>
+<tr><td>topo_builder_build_id</td><td>这次构建的id</th></tr>
+</table>
 
-这些参数都在执行任务命令时可以从环境变量中获取并使用，比如我们可以创建一个job，执行命令 echo %topo_builder_job%, 这里就验证了环境变量的使用，通过查看这个job的log，我们就可以看到输出的结果。
+这些参数都在执行任务命令时可以从环境变量中获取并使用，比如我们可以创建一个job，执行命令 echo %topo\_builder\_job%, 这里就验证了环境变量的使用，通过查看这个job的log，我们就可以看到输出的结果。
 
-=== 钩子和插件
+### 钩子和插件
 
 Topo Builder支持通过用户提供的钩子函数来扩展功能，打开安装目录下的builder/jobsrv/hook.py，这个文件下就定义了几个钩子函数，下表给出它们的解释：
 
-[options="header"]
-|=======================
-|钩子              |含义
-|pre_job_hook      |这个hook在job执行前被触发，返回False则不再执行下去了，参数是job, context
-|pre_do_job_hook   |这个hook在真正job执行前被触发，参数是job, build, context, logger
-|post_do_job_hook  |这个hook在真正job执行后被触发，参数是job, build, context, logger
-|post_job_hook     |这个hook在job执行完后触发，参数是job, build, context       
-|=======================
+<table>
+<tr><th>钩子</th><th>含义</th></tr>
+<tr><td>pre_job_hook</td><td>这个hook在job执行前被触发，返回False则不再执行下去了，参数是job, context</td></tr>
+<tr><td>pre_do_job_hook</td><td>这个hook在真正job执行前被触发，参数是job, build, context, logger</td></tr>
+<tr><td>post_do_job_hook</td><td>这个hook在真正job执行后被触发，参数是job, build, context, logger</td></tr>
+<tr><td>post_job_hook</td><td>这个hook在job执行完后触发，参数是job, build, context</td></tr>
+</table>
 
 这些钩子都需要通过Python来编写，job，build，context和logger是钩子函数被调用时的参数，job和build是相应的job和build对象，context是这次构建的上下文，是一个字典，logger是一个log函数，可以用来写一些log到这次构建的log文件。
 
-NOTE: 注意logger这个参数在pre_job_hook和post_job_hook时都没有，是因为pre_job_hook被触发时log还没准备好，而post_job_hook被触发时，log已经关闭。
+>NOTE: 注意logger这个参数在pre\_job\_hook和post\_job\_hook时都没有，是因为pre\_job\_hook被触发时log还没准备好，而post\_job\_hook被触发时，log已经关闭。
 
-== 系统设置
+## 系统设置
 
 Topo Builder有一些基本的系统设置，这一章介绍一下，在Admin界面中点击Settings，然后选择Topo Builder Setting，就可以看到下面的设置界面：
 
-image::images/builder_admin_setting.png[]
+![](/static/images/builder_admin_setting.png)
 
 下面解释一下这些设置：
 
-* 需要登录：这个表示是否登录用户才可以访问Topo Builder。
-* Builder URL：用于设置Topo Builder所在的服务器url，这样在构建发送的邮件中可以包括这个url来让用户直接点击链接就可以进入Topo Builder，比如我们可以设置这个为http://192.168.1.1:8000。
+**需要登录**：这个表示是否登录用户才可以访问Topo Builder。
 
-NOTE: 这个URL不要设置为http://localhost:8000，这样的话收到邮件的开发人员可能会打不开这个链接。
+**Builder URL**：用于设置Topo Builder所在的服务器url，这样在构建发送的邮件中可以包括这个url来让用户直接点击链接就可以进入Topo Builder，比如我们可以设置这个为http://192.168.1.1:8000。
 
-* SMTP：下面的一组是smtp相关的设置，必须设置正确Topo Builder才可以发送邮件，我们以Gmail为例，那么设置如下即可：
+>NOTE: 这个URL不要设置为http://localhost:8000，这样的话收到邮件的开发人员可能会打不开这个链接。
 
-[options="header"]
-|=======================
-|设置             | 值
-|Smtp server      | smtp.gmail.com
-|Smtp port        | 587
-|Smtp username    | gmail帐户名，要加@gmail.com
-|Smtp password	  | gmail密码
-|Smtp tls         | 设置为true      
-|=======================
+**SMTP**：下面的一组是smtp相关的设置，必须设置正确Topo Builder才可以发送邮件，我们以Gmail为例，那么设置如下即可：
 
-== 常见问题
+<table>
+<tr><th>设置</th><th>值</th></tr>
+<tr><td>SMTP服务器</td><td>smtp.gmail.com</td></tr>
+<tr><td>SMTP端口号</td><td>587</td></tr>
+<tr><td>SMTP用户名</td><td>gmail帐户名，要加@gmail.com</td></tr>
+<tr><td>SMTP密码</td><td>gmail密码</td></tr>
+<tr><td>SMTP TLS</td><td>设置为true</td></tr>
+</table>
 
-运行builder.bat，服务程序已经启动起来，但是用浏览器访问http://localhost:8000，为何出错？::
-请检查你解压缩builder的完整目录名中是否包含中文或空格，如果有，除去中文和空格再尝试一下。
+## 常见问题
 
-使用浏览器可以看到Builder的界面，但是有些按钮，比如删除build的图标为什么看不到？::
-因为有些操作是需要登录后才看到，所以请先通过右上角的管理按钮登录Builder，缺省的登录账户和密码都是admin。
+* 运行builder.bat，服务程序已经启动起来，但是用浏览器访问http://localhost:8000，为何出错？
+> 请检查你解压缩builder的完整目录名中是否包含中文或空格，如果有，除去中文和空格再尝试一下。
 
-我已经有一个Job了，能否根据这个Job创建一个新的Job？::
-在后台界面中，选择这个Job，修改适当的参数后，选择下面的“保存为新的”按钮，就可以保存一个新的Job，但如果这个Job有相应的版本库关联，也要将这些版本库一一打开，修改关联的Job，然后执行“保存为新的”。
+* 使用浏览器可以看到Builder的界面，但是有些按钮，比如删除build的图标为什么看不到？
+> 因为有些操作是需要登录后才看到，所以请先通过右上角的管理按钮登录Builder，缺省的登录账户和密码都是admin。
 
-我已经点击了手动执行Job的按钮，为什么Job还不运行？::
-手动执行Job只是绕过了cron的定时调度，但对于版本库的构建策略还是一样遵循的，也就是说，如果你的Job定义了检测到新版本才构建的目录，那么点击了手动执行后，如果没有检测到版本库的新版本的话，是不会运行的。
+* 我已经有一个Job了，能否根据这个Job创建一个新的Job？
+> 在后台界面中，选择这个Job，修改适当的参数后，选择下面的“保存为新的”按钮，就可以保存一个新的Job，但如果这个Job有相应的版本库关联，也要将这些版本库一一打开，修改关联的Job，然后执行“保存为新的”。
 
-绑定到Svn库的时候，我的库是通过Https访问的，为什么总是取不下来版本？::
-Https访问的Svn库需要服务器端有正确的证书，并且这个证书要和服务器的名称匹配（比如域名或者ip地址）。
+* 我已经点击了手动执行Job的按钮，为什么Job还不运行？
+> 手动执行Job只是绕过了cron的定时调度，但对于版本库的构建策略还是一样遵循的，也就是说，如果你的Job定义了检测到新版本才构建的目录，那么点击了手动执行后，如果没有检测到版本库的新版本的话，是不会运行的。
+
+* 绑定到Svn库的时候，我的库是通过Https访问的，为什么总是取不下来版本？
+> Https访问的Svn库需要服务器端有正确的证书，并且这个证书要和服务器的名称匹配（比如域名或者ip地址）。
 
 
