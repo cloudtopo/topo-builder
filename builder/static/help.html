@@ -4,14 +4,21 @@
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <title>Topo Builder</title>
 <link rel="stylesheet" media="all" href="markdown.css">
-<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="showdown.js"></script>
+<script src="jquery-1.7.2.min.js"></script>
+<script src="toc.js"></script>
+<script src="showdown.js"></script>
 </head>
 
 <body>
+ <div id="toc">
+ </div>
+ <div id="markdown">
+ </div>
 <script type="text/javascript">
-$.get('/static/help.txt', function(data) { 
-$("body").html(new Showdown.converter().makeHtml(data));});
+ $.get('/static/help.txt', function(data) { 
+  $("#markdown").html(new Showdown.converter().makeHtml(data));
+  $('#toc').toc({});
+});
 </script>
 </body>
 </html>
