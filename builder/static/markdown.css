@@ -1,17 +1,5 @@
-
-body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-	margin: 0;
-	padding: 0;
-}
-
-body {
-    font-family: Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei,Verdana,Arial,Tahoma,Helvetica,Georgia,Sans-serif;
-	color: #444;
-	background: #fff;    
-    margin-left: 180px;
-    width:850px;
-}
-
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr{margin:0;padding:0;}
+body {color: #444;background: #fff;margin-left: 180px;width:850px;font-family: Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei,Verdana,Arial,Tahoma,Helvetica,Georgia,Sans-serif;}
 h1, h2, h3, h4, h5, h6{border:0;}
 h1{font-size:170%;padding-top:.5em;}
 h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
@@ -26,10 +14,12 @@ ul ul, ul ol, ol ol, ol ul{margin-top:0;margin-bottom:0;}
 blockquote{margin:1em 0;border:1px solid #ddd;border-left:5px solid #ddd;padding-left:.6em;}
 dt{font-weight:bold;margin-left:1em;}
 dd{margin-left:2em;margin-bottom:1em;}
-table{margin:1em 0;}
-table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
-table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
-pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;line-height:1.5em;overflow:auto;-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+table{border-collapse:collapse; border-spacing:0;}
+td{ vertical-align:top;}
+table th, table td, th, td {border:1px solid #d7d7d7;padding:5px 10px;}
+table th, th {	background:#f8f8f8;	white-space:nowrap;}
+table thead th, thead th {	background:#f8f8f8;}
+pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;line-height:1.5em;overflow:auto;}
 pre code{padding:0;font-size:12px;background-color:#eee;border:none;}
 code{font-size:14px;background-color:#f8f8ff;padding:0 .2em;border:1px solid #dedede;}
 img{max-width:100%;}
@@ -39,3 +29,5 @@ img{max-width:100%;}
 #toc a {color: #fff;text-decoration: none;display: block;}
 #toc .toc-h2 {padding-left: 10px;}
 #toc .toc-h3 {padding-left: 20px;}
+#toc .toc-active{background:#fff;}
+#toc .toc-active a{color: #333;}
